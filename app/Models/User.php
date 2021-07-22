@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\UserSavingEvent;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -13,13 +14,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable, HasFactory;
 
+    protected $primaryKey = 'id';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'full_name', 'document', 'email', 'password', 'phone', 'balance', 'type'
     ];
 
     /**
@@ -28,6 +31,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password'
+    ];
+
+    protected $attributes = [
+        'phone' => '',
+        'balance' => 0.00
+    ];
+
+    protected $dispatchesEvents = [
+        'saving' => UserSavingEvent::class
     ];
 }
