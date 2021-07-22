@@ -4,8 +4,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Controllers\Requests\User\UserRequest;
 use App\Repositories\User\IUserRepository;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -17,9 +18,9 @@ class UserController extends Controller
         $this->user = $user;
     }
 
-    public function create(Request $request)
+    public function create(UserRequest $userRequest)
     {
-        $newUser = $this->user->create($request->all());
+        $newUser = $this->user->create($userRequest->getParams()->toArray());
         return response()->json($newUser, 201);
     }
 

@@ -28,7 +28,6 @@ class UserCreatingEvent extends Event
 
         $this->user->setAttribute('password', Hash::make($user->password));
         $this->user->setAttribute('type', $this->documentTypeChecker->getDocumentType($user->document));
-        $this->user->setAttribute('document', $this->documentTypeChecker->removeSpecialCharacters($user->document));
     }
 
 }
