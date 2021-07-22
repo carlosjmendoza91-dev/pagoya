@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\UserSavingEvent;
+use App\Events\UserCreatingEvent;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -40,6 +40,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     protected $dispatchesEvents = [
-        'saving' => UserSavingEvent::class
+        'creating' => UserCreatingEvent::class
     ];
 }

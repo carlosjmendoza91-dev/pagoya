@@ -3,9 +3,9 @@
 
 namespace App\Listeners;
 
-use App\Events\UserSavingEvent as UserSavingEvent;
+use App\Events\UserCreatingEvent as UserSavingEvent;
 
-class UserSavingListener
+class UserCreatingListener
 {
     /**
      * Create the event listener.
@@ -20,10 +20,10 @@ class UserSavingListener
     /**
      * Handle the event.
      *
-     * @param  UserSavingEvent  $event
+     * @param  UserCreatingEvent  $event
      * @return void
      */
-    public function handle(UserSavingEvent $event)
+    public function handle(UserCreatingEvent $event)
     {
         //
     }

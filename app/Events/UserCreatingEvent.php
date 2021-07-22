@@ -8,7 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Helpers\DocumentTypeChecker;
 
-class UserSavingEvent extends Event
+class UserCreatingEvent extends Event
 {
 
     use SerializesModels;
