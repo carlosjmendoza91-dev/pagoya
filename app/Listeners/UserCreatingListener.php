@@ -3,7 +3,7 @@
 
 namespace App\Listeners;
 
-use App\Events\UserCreatingEvent as UserSavingEvent;
+use App\Events\UserCreatingEvent as UserCreatingEvent;
 
 class UserCreatingListener
 {
