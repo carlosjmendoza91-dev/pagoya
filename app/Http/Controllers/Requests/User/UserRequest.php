@@ -19,7 +19,8 @@ class UserRequest extends Controller
                 'document' => 'required|string|unique:users',
                 'email' => 'required|email|unique:users',
                 'password' => 'required|min:5',
-                'phone' => 'string'
+                'phone' => 'string',
+                'balance' => 'numeric'
             ]
         );
 
