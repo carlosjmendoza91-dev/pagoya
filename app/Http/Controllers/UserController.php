@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Controllers\Requests\Authentication\LoginRequest;
-use App\Http\Controllers\Requests\User\CreateUserRequest;
+use App\Http\Controllers\Requests\User\SignUpRequest;
 use App\Http\Helpers\DefaultResponsePayload;
 use App\Models\User;
 use App\Repositories\User\IUserRepository;
@@ -20,7 +20,7 @@ class UserController extends Controller
         $this->user = $user;
     }
 
-    public function create(CreateUserRequest $createUserRequest)
+    public function create(SignUpRequest $createUserRequest)
     {
         $newUser = $this->user->create($createUserRequest->getParams()->toArray());
         $responsePayload = new DefaultResponsePayload($newUser, '');
