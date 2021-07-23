@@ -4,6 +4,7 @@
 namespace App\Repositories\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements IUserRepository
 {
@@ -13,5 +14,21 @@ class UserRepository implements IUserRepository
         $newUser = new User($userData);
         $newUser->save();
         return $newUser->toArray();
+    }
+
+    public function verifyPassword(Array $userLogin)
+    {
+        $currentUser = $this->getUserByEmail($userLogin['email']);
+        if(Hash::check($userLogin['password'], $currentUser->password))
+            return $currentUser;
+        return null;
+    }
+    private function getUserByEmail(string $email){
+        return User::where('email', $email)->first();
+    }
+
+    public function checkIfUserExists(string $email)
+    {
+        return User::where('email', $email)->count();
     }
 }

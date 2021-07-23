@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Requests\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserRequest extends Controller
+class CreateUserRequest extends Controller
 {
     /**
      * @throws \Illuminate\Validation\ValidationException

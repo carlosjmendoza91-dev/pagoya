@@ -4,9 +4,11 @@
 namespace App\Http\Controllers;
 
 
-use App\Http\Controllers\Requests\User\UserRequest;
+use App\Http\Controllers\Requests\Authentication\LoginRequest;
+use App\Http\Controllers\Requests\User\CreateUserRequest;
+use App\Http\Helpers\DefaultResponsePayload;
+use App\Models\User;
 use App\Repositories\User\IUserRepository;
-//use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -18,10 +20,18 @@ class UserController extends Controller
         $this->user = $user;
     }
 
-    public function create(UserRequest $userRequest)
+    public function create(CreateUserRequest $createUserRequest)
     {
-        $newUser = $this->user->create($userRequest->getParams()->toArray());
-        return response()->json($newUser, 201);
+        $newUser = $this->user->create($createUserRequest->getParams()->toArray());
+        $responsePayload = new DefaultResponsePayload($newUser, '');
+        return response()->json($responsePayload->toArray(), 201);
     }
+
+    public function authenticate(LoginRequest $loginRequest){
+        $userAuthenticated = $this->user->verifyPassword($loginRequest->getParams()->toArray());
+        $responsePayload = new DefaultResponsePayload($userAuthenticated, '');
+        return response()->json($responsePayload->toArray(), 200);
+    }
+
 
 }
