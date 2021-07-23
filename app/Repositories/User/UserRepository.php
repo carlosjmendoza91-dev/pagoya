@@ -12,6 +12,6 @@ class UserRepository implements IUserRepository
     {
         $newUser = new User($userData);
         $newUser->save();
-        return $newUser;
+        return $newUser->toArray();
     }
 }
