@@ -18,9 +18,9 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login','signup']]);
     }
 
-    public function signup(SignUpRequest $createUserRequest)
+    public function signup(SignUpRequest $signUpRequest)
     {
-        $newUser = $this->user->create($createUserRequest->getParams()->toArray());
+        $newUser = $this->user->create($signUpRequest->getParams()->toArray());
         return $this->returnResponse($newUser, 200);
     }
 
