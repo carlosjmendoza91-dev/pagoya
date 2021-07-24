@@ -40,7 +40,7 @@ class DocumentTypeCheckerTest extends TestCase
     {
         $documentTypeChecker = new DocumentTypeChecker();
         $cpf = '063.913.247-27';
-        $this->assertEquals(1, $documentTypeChecker->getDocumentType($cpf));
+        $this->assertEquals($documentTypeChecker::PF_DOCUMENT_TYPE, $documentTypeChecker->getDocumentType($cpf));
     }
 
     /**
@@ -52,6 +52,6 @@ class DocumentTypeCheckerTest extends TestCase
     {
         $documentTypeChecker = new DocumentTypeChecker();
         $cnpj = '17.284.275/0001-05';
-        $this->assertEquals(0, $documentTypeChecker->getDocumentType($cnpj));
+        $this->assertEquals($documentTypeChecker::PJ_DOCUMENT_TYPE, $documentTypeChecker->getDocumentType($cnpj));
     }
 }

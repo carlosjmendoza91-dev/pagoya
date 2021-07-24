@@ -79,7 +79,7 @@ class DefaultResponsePayloadTest extends TestCase
 
         $this->assertArrayHasKey('errors', $responseArray);
         $this->assertEquals($errors, $responseArray['errors']);
-        
+
         $this->assertArrayHasKey('timestamp', $responseArray);
         $this->assertEquals($responseArray['timestamp'], date('Y-m-d H:i:s'));
     }
