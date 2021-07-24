@@ -18,7 +18,7 @@ class ControllerTest extends TestCase
     {
         $payloadArray = ['data' => 'Dummy data', 'message' => 'Dummy message'];
 
-        $request = new \Symfony\Component\HttpFoundation\Request([], $payloadArray);
+        $request = new Request([], $payloadArray);
         $request->setMethod('POST');
 
         $controller = new Controller($request);
