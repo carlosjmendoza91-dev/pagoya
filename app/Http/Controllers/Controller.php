@@ -19,14 +19,9 @@ class Controller extends BaseController implements ApiRequest
         $this->request = $request;
     }
 
-    /**
-     * Return the Request Object
-     *
-     * @return \Illuminate\Http\Request
-     */
-    public function getParams(): Request
+    public function getParams()
     {
-        return $this->request->replace($this->params);
+        return $this->params;
     }
 
     public function getCredentials() {
