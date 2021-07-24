@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Http\Controllers\Requests\User;
+namespace App\Http\Controllers\Requests\Authentication;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CreateUserRequest extends Controller
+class SignUpRequest extends Controller
 {
     /**
      * @throws \Illuminate\Validation\ValidationException
