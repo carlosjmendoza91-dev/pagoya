@@ -60,8 +60,13 @@ class Handler extends ExceptionHandler
         }
 
         if($exception instanceof NotFoundHttpException){
-            $newResponse = new ResponsePayload([], 'Route not found', $exception->getMessage());
+            $newResponse = new ResponsePayload([], config('handlerMessages.route_not_found'), $exception->getMessage());
             return response()->json($newResponse->toArray(), 404);
+        }
+
+        if($exception instanceof AuthorizationException){
+            $newResponse = new ResponsePayload([], config('handlerMessages.unauthorized'), $exception->getMessage());
+            return response()->json($newResponse->toArray(), 401);
         }
 
         $newResponse = new ResponsePayload([], '', $exception->getMessage());
