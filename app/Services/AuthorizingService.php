@@ -5,21 +5,29 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 
-class AuthorizingService
+class AuthorizingService implements IExternalServiceResponse
 {
 
     const AUTHORIZED = 'Autorizado';
-    const SERVICE_NOT_AVAILABLE = 'O servico autenticador nao esta disponivel';
 
     public function getAuthorization(){
         try{
             $response = Http::get(config('externalAPI.url_notifier_service'));
             $responseContent = $response->json();
-            if($responseContent && isset($responseContent['message']) && $responseContent['message'] === self::AUTHORIZED)
+
+            if($responseContent && isset($responseContent['message']) && $responseContent['message'] === self::AUTHORIZED){
                 return true;
+            }
+            throw new \Exception(config('authorizingServiceMessages.transaction_not_authorized'));
+
         } catch(\Exception $e){
-            throw new \Exception(self::SERVICE_NOT_AVAILABLE);
+            throw new \Exception(config('authorizingServiceMessages.service_not_available'));
         }
-        return false;
+
+    }
+
+    public function createResponse($status, $message, $errors = []): ExternalServiceResponse
+    {
+        // TODO: Implement createResponse() method.
     }
 }
