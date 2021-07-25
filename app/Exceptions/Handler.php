@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -56,6 +57,11 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof ValidationException) {
             return $this->validationExceptionResponse($exception);
+        }
+
+        if($exception instanceof NotFoundHttpException){
+            $newResponse = new ResponsePayload([], 'Route not found', $exception->getMessage());
+            return response()->json($newResponse->toArray(), 404);
         }
 
         $newResponse = new ResponsePayload([], '', $exception->getMessage());
