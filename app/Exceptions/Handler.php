@@ -58,8 +58,8 @@ class Handler extends ExceptionHandler
             return $this->validationExceptionResponse($exception);
         }
 
-        //return parent::render($request, $exception);
-        //return response()->json(['error' => $exception->getMessage()], 500);
+        $newResponse = new DefaultResponsePayload([], '', $exception->getMessage());
+        return response()->json($newResponse->toArray(), 500);
     }
 
     private function validationExceptionResponse(ValidationException $exception)
