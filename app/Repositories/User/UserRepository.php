@@ -67,9 +67,7 @@ class UserRepository implements IUserRepository
         DB::transaction(function() use($querysTransaction) {
             DB::update($querysTransaction['queryPayer']);
             DB::update($querysTransaction['queryPayee']);
-            $transactionAuthorization = $this->autorizingService->getAuthorization();
-            if(!$transactionAuthorization)
-                throw new \Exception('Nao foi possivel realizar a transacao');
+            $this->autorizingService->getAuthorization();
             DB::commit();
         });
         return $this->notifierService->sendNotification();
