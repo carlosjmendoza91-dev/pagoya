@@ -10,5 +10,7 @@ interface IUserRepository {
 
     public function verifyPassword(Array $userLogin);
 
-    public function checkIfUserExists(string $email);
+    public function checkType(int $id);
+
+    public function getBalance(int $id);
 }

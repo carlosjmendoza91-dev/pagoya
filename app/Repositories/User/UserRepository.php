@@ -23,12 +23,21 @@ class UserRepository implements IUserRepository
             return $currentUser;
         return null;
     }
+
     private function getUserByEmail(string $email){
         return User::where('email', $email)->first();
     }
 
-    public function checkIfUserExists(string $email)
+
+    public function checkType(int $id)
     {
-        return User::where('email', $email)->count();
+        $user = User::where('id', $id)->first();
+        return $user->type;
+    }
+
+    public function getBalance(int $id)
+    {
+        $user = User::where('id', $id)->first();
+        return $user->balance;
     }
 }
