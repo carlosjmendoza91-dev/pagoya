@@ -9,7 +9,7 @@ use App\Http\Helpers\DocumentTypeChecker;
 
 class TransactionRepository implements ITransactionRepository
 {
-    private $user = null;
+    private $user;
 
     public function __construct(IUserRepository $IUserRepository)
     {
@@ -23,24 +23,28 @@ class TransactionRepository implements ITransactionRepository
     {
         $this->checkUserType($transactionData['payer']);
         $this->checkUserBalance($transactionData['payer'], $transactionData['value']);
+        return $this->saveTransaction($transactionData);
+    }
 
+    private function saveTransaction($transactionData){
+        $transactionResult = $this->user->updateBalances($transactionData['payer'], $transactionData['payee'], $transactionData['value']);
         $newTransference = new Transaction($transactionData);
         $newTransference->save();
-        return $newTransference->toArray();
+        return $transactionResult;
     }
 
     private function checkUserType(int $id)
     {
         $user = $this->user->getType($id);
         if($user === DocumentTypeChecker::PJ_DOCUMENT_TYPE)
-            throw new \Exception('Usuario CPNJ nao pode enviar dinheiro');
+            throw new \Exception(config('transactionMessages.user_type_not_allowed'));
     }
 
     private function checkUserBalance(int $id, float $amount)
     {
         $balance = $this->user->getBalance($id);
         if(round($balance, 2) < round($amount, 2))
-            throw new \Exception('Usuario nao possui dinheiro para enviar');
+            throw new \Exception(config('transactionMessages.user_no_funds_available'));
     }
 
 }
