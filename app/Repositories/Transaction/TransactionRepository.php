@@ -45,7 +45,7 @@ class TransactionRepository implements ITransactionRepository
     {
         $balance = $this->user->getBalance($id);
         if(round($balance, 2) < round($amount, 2))
-            throw new \Exception(config('transactionMessages.user_no_funds_available'));
+            throw new AuthorizationException(config('transactionMessages.user_no_funds_available'));
     }
 
 }

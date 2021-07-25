@@ -305,9 +305,22 @@ O Bearer Token precisa ser do usuario que esta especificado no campo "payer", ca
 
     {
         "data": [],
-        "message": "",
-        "errors": "User does not have priviledges to perform this operation",
-        "timestamp": "2021-07-25 21:56:04"
+        "message": "User does not have priviledges to perform this operation",
+        "errors": "User performing this operation does not correspond to validation token",
+        "timestamp": "2021-07-25 23:20:58"
+    }
+
+#### Response - 401 Unauthorized (Usuario nao tem fundos suficientes)
+
+    HTTP/1.1 401 Unauthorized
+    Status: 401 Unauthorized
+    Content-Type: application/json
+
+    {
+        "data": [],
+        "message": User does not have priviledges to perform this operation,
+        "errors": "Payer does not have enough funds",
+        "timestamp": "2021-07-25 23:11:48"
     }
 
 ### Logout

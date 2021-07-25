@@ -28,7 +28,7 @@ class TransactionController extends Controller
 
     private function checkLoggedInUser(int $idPayer){
         if(auth()->user()->getAuthIdentifier() !== $idPayer)
-            throw new AuthorizationException(config('authMessages.user_no_priviledges'));
+            throw new AuthorizationException(config('authMessages.user_no_match'));
         return true;
     }
 
