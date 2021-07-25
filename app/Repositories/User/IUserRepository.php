@@ -13,4 +13,6 @@ interface IUserRepository {
     public function getType(int $id);
 
     public function getBalance(int $id);
+
+    public function updateBalances(int $idPayer, int $idPayee, float $amount);
 }
