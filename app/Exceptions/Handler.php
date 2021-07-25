@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Http\Helpers\DefaultResponsePayload;
+use App\Http\Helpers\ResponsePayload;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
             return $this->validationExceptionResponse($exception);
         }
 
-        $newResponse = new DefaultResponsePayload([], '', $exception->getMessage());
+        $newResponse = new ResponsePayload([], '', $exception->getMessage());
         return response()->json($newResponse->toArray(), 500);
     }
 
@@ -68,7 +68,7 @@ class Handler extends ExceptionHandler
         foreach ($exception->errors() as $key => $value) {
             $errors[$key] = $value[0];
         }
-        $responsePayload = new DefaultResponsePayload([], self::VALIDATION_EXCEPTION_MESSAGE, $errors);
+        $responsePayload = new ResponsePayload([], self::VALIDATION_EXCEPTION_MESSAGE, $errors);
         return response()->json( $responsePayload->toArray() , 400);
     }
 }
