@@ -27,7 +27,7 @@ class TransactionController extends Controller
 
     private function checkLoggedInUser(int $idPayer){
         if(auth()->user()->getAuthIdentifier() !== $idPayer)
-            throw new \Exception('Voce nao possui privilegios para realizar essa operacao');
+            throw new \Exception(config('authMessages.user_no_priviledges'));
         return true;
     }
 

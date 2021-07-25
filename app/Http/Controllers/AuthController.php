@@ -10,8 +10,6 @@ use App\Repositories\User\IUserRepository;
 
 class AuthController extends Controller
 {
-    const SIGNUP_SUCCESS = 'User was created successfully';
-    const VERIFY_CREDENTIALS = 'Please, verify your access credentials';
 
     protected $user = null;
 
@@ -23,18 +21,23 @@ class AuthController extends Controller
     public function signup(SignUpRequest $signUpRequest)
     {
         $newUser = $this->user->create($signUpRequest->getParams());
-        return $this->returnResponse([], 200, self::SIGNUP_SUCCESS);
+        return $this->returnResponse([], 200, config('authMessages.signup_success'));
     }
 
     public function login(LoginRequest $loginRequest)
     {
         if (! $token = Auth::attempt($loginRequest->getCredentials()))
-            return $this->returnResponse([], 401, self::VERIFY_CREDENTIALS);
+            return $this->returnResponse([], 401, config('authMessages.verify_credentials'));
 
         return $this->returnResponse([
             'token' => $token,
             'token_type' => 'Bearer',
             'expires_in' => null
-        ], 200);
+        ], 200, config('authMessages.login_success'));
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        return $this->returnResponse([], 200, config('authMessages.logout_success'));
     }
 }
