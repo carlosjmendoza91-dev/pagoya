@@ -6,20 +6,31 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 
-class NotifierService
+class NotifierService implements IExternalServiceResponse
 {
 
     const SUCCESS = 'Success';
-    const USER_NOTIFIED = 'A notificacao foi enviada com sucesso';
-    const USER_NOT_NOTIFIED = 'Nao foi possivel enviar a notificacao';
 
     public function sendNotification(){
         try{
             $response = Http::get(config('externalAPI.url_authorizing_service'));
         } catch(\Exception $e){
-           return self::USER_NOT_NOTIFIED;
+            return $this->createResponse(
+                false,
+                '',
+                [ 'notificationService' => config('notifierServiceMessages.service_not_available') ]);
         }
         $responseContent = $response->json();
-        return ($responseContent && $responseContent['message'] && $responseContent['message'] === self::SUCCESS) ?  self::USER_NOTIFIED : self::USER_NOT_NOTIFIED;
+
+        $status = $responseContent && $responseContent['message'] && $responseContent['message'] === self::SUCCESS;
+        $message = $status ? config('notifierServiceMessages.notification_send_success') : '';
+        $errors = $status ? [] : [ 'notificationService' => config('notifierServiceMessages.notification_send_failure') ];
+
+        return $this->createResponse($status, $message, $errors);
+    }
+
+    public function createResponse($status, $message, $errors = []): ExternalServiceResponse
+    {
+        return new ExternalServiceResponse($status, $message, $errors);
     }
 }
