@@ -101,7 +101,7 @@ A continuacao, serao detalhada cada uma de elas, a fim de explicar como funciona
 
 ### SignUp
 
-`POST /api/signup`
+`POST /api/user/signup`
 
 Endpoint utilizado para criar um novo usuario dentro da plataforma. 
 
@@ -114,7 +114,7 @@ Nao pode se cadastrar dois usuarios que utilizem o mesmo documento ou o mesmo em
 O parametro balance precisa de ter um valor minimo de 0.01
 
     curl -i -H 'Content-Type: application/json'
-    --request POST 'http://localhost:8000/api/signup'
+    --request POST 'http://localhost:8000/api/user/signup'
     --data-raw '{
         "full_name": "User name",
         "document": "123.456.789-01",
@@ -169,7 +169,7 @@ O parametro balance precisa de ter um valor minimo de 0.01
 
 ### Login
 
-`POST /api/login`
+`POST /api/user/login`
 
 Endpoint utilizado para autenticar um usuario dentro da plataforma.
 
@@ -182,7 +182,7 @@ Observacoes:
 O login e realizado utilizando o email do usuario e a senha cadastrada no endpoint de signup
 
     curl -i -H 'Content-Type: application/json'
-    --request POST 'http://localhost:8000/api/login'
+    --request POST 'http://localhost:8000/api/user/login'
     --data-raw '{
         "email": "userexample@gmail.com",
         "password": "12345"
@@ -312,16 +312,18 @@ O Bearer Token precisa ser do usuario que esta especificado no campo "payer", ca
 
 ### Logout
 
-`POST /api/logout`
+`POST /api/user/logout`
 
 Endpoint utilizado para realizar logout do usuario dentro da plataforma.
+
+O endpoint de logout invalida o JWT retornado no login.
 
 Observacoes:
 
 E necessario enviar o Bearer Token obtido no login para conseguir realizar a operacao.
 
     curl -i -H 'Content-Type: application/json'
-    --request POST 'http://localhost:8000/api/logout'
+    --request POST 'http://localhost:8000/api/user/logout'
     --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc'
     --data-raw ''
 

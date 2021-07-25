@@ -13,20 +13,17 @@
 |
 */
 
-$router->group(['middleware' => 'auth','prefix' => 'transaction'], function ($router)
+$router->group(['prefix' => 'api'], function ($router)
 {
-    $router->post('/', 'TransactionController@store');
-});
+    $router->post('user/signup', 'AuthController@signup');
+    $router->post('user/login', 'AuthController@login');
 
-$router->group(['middleware' => 'auth','prefix' => 'user'], function ($router)
-{
-    $router->post('logout', 'AuthController@logout');
-});
+    $router->group(['middleware' => 'auth'], function ($router)
+    {
+        $router->post('transaction', 'TransactionController@store');
+        $router->post('user/logout', 'AuthController@logout');
+    });
 
-$router->group(['prefix' => 'user'], function () use ($router)
-{
-    $router->post('signup', 'AuthController@signup');
-    $router->post('login', 'AuthController@login');
 });
 
 
