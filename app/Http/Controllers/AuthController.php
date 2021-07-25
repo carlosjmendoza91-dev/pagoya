@@ -10,39 +10,34 @@ use App\Repositories\User\IUserRepository;
 
 class AuthController extends Controller
 {
+
     protected $user = null;
 
-    public function __construct(IUserRepository $user)
+    public function __construct(IUserRepository $IUserRepository)
     {
-        $this->user = $user;
-        $this->middleware('auth:api', ['except' => ['login','signup']]);
+        $this->user = $IUserRepository;
     }
 
     public function signup(SignUpRequest $signUpRequest)
     {
         $newUser = $this->user->create($signUpRequest->getParams());
-        return $this->returnResponse($newUser, 200);
+        return $this->returnResponse([], 200, config('authMessages.signup_success'));
     }
 
     public function login(LoginRequest $loginRequest)
     {
         if (! $token = Auth::attempt($loginRequest->getCredentials()))
-            return $this->returnResponse([], 401, 'Unauthorized');
+            return $this->returnResponse([], 401, config('authMessages.verify_credentials'));
 
         return $this->returnResponse([
             'token' => $token,
             'token_type' => 'Bearer',
             'expires_in' => null
-        ], 200);
+        ], 200, config('authMessages.login_success'));
     }
 
-    /**
-     * Get user details.
-     *
-     * @param  Request  $request
-     */
-    public function me()
-    {
-        return response()->json(auth()->user());
+    public function logout(Request $request){
+        Auth::logout();
+        return $this->returnResponse([], 200, config('authMessages.logout_success'));
     }
 }

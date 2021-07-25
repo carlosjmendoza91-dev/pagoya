@@ -3,7 +3,7 @@
 
 namespace AppTests\Unit;
 
-use App\Http\Helpers\DefaultResponsePayload;
+use App\Http\Helpers\ResponsePayload;
 use TestCase;
 
 class DefaultResponsePayloadTest extends TestCase
@@ -18,7 +18,7 @@ class DefaultResponsePayloadTest extends TestCase
     {
         $dataArray = [ 'data' => 'Dummy test'];
 
-        $defaultResponse = new DefaultResponsePayload($dataArray);
+        $defaultResponse = new ResponsePayload($dataArray);
         $responseArray = $defaultResponse->toArray();
 
         $this->assertIsArray($responseArray);
@@ -40,7 +40,7 @@ class DefaultResponsePayloadTest extends TestCase
         $dataArray = [ 'data' => 'Dummy test'];
         $message = 'This is a dummy message';
 
-        $defaultResponse = new DefaultResponsePayload($dataArray, $message);
+        $defaultResponse = new ResponsePayload($dataArray, $message);
         $responseArray = $defaultResponse->toArray();
 
         $this->assertIsArray($responseArray);
@@ -66,7 +66,7 @@ class DefaultResponsePayloadTest extends TestCase
         $message = 'This is a dummy message';
         $errors = ['error1' => 'This is error1', 'error2' => 'This is error 2'];
 
-        $defaultResponse = new DefaultResponsePayload($dataArray, $message, $errors);
+        $defaultResponse = new ResponsePayload($dataArray, $message, $errors);
         $responseArray = $defaultResponse->toArray();
 
         $this->assertIsArray($responseArray);

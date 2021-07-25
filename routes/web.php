@@ -19,7 +19,8 @@ $router->get('/', function () use ($router) {
 
 $router->group(['middleware' => 'auth','prefix' => 'api'], function ($router)
 {
-    $router->get('me', 'AuthController@me');
+    $router->post('transaction', 'TransactionController@store');
+    $router->post('logout', 'AuthController@logout');
 });
 
 $router->group(['prefix' => 'api'], function () use ($router)
@@ -27,3 +28,6 @@ $router->group(['prefix' => 'api'], function () use ($router)
     $router->post('signup', 'AuthController@signup');
     $router->post('login', 'AuthController@login');
 });
+
+
+

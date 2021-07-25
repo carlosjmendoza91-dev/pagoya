@@ -4,7 +4,7 @@
 namespace App\Http\Helpers;
 
 
-class DefaultResponsePayload
+class ResponsePayload
 {
 
     protected $data;
