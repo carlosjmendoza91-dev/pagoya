@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Helpers\DefaultResponsePayload;
+use App\Http\Helpers\ResponsePayload;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Requests\ApiRequest;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController implements ApiRequest
 {
-    protected $service;
     protected $params;
     public $request;
 
@@ -31,11 +30,11 @@ class Controller extends BaseController implements ApiRequest
                 'password' => $this->params['password']
             ];
         }
-
+        return [];
     }
 
     public function returnResponse($data, $status, $message = '', $errors = []){
-        $responsePayload = new DefaultResponsePayload($data, $message, $errors);
+        $responsePayload = new ResponsePayload($data, $message, $errors);
         return response()->json($responsePayload->toArray(), $status);
     }
 
