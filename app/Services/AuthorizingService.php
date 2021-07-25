@@ -12,7 +12,7 @@ class AuthorizingService implements IExternalServiceResponse
 
     public function getAuthorization(){
         try{
-            $response = Http::get(config('externalAPI.url_notifier_service'));
+            $response = Http::get(config('externalAPI.url_authorizing_service'));
             $responseContent = $response->json();
 
             if($responseContent && isset($responseContent['message']) && $responseContent['message'] === self::AUTHORIZED){
