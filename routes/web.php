@@ -13,10 +13,6 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
 $router->group(['middleware' => 'auth','prefix' => 'api'], function ($router)
 {
     $router->post('transaction', 'TransactionController@store');
