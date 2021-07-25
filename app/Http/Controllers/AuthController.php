@@ -12,9 +12,9 @@ class AuthController extends Controller
 {
     protected $user = null;
 
-    public function __construct(IUserRepository $user)
+    public function __construct(IUserRepository $IUserRepository)
     {
-        $this->user = $user;
+        $this->user = $IUserRepository;
         $this->middleware('auth:api', ['except' => ['login','signup']]);
     }
 
