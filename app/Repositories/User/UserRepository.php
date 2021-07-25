@@ -29,7 +29,7 @@ class UserRepository implements IUserRepository
     }
 
 
-    public function checkType(int $id)
+    public function getType(int $id)
     {
         $user = User::where('id', $id)->first();
         return $user->type;

@@ -10,7 +10,7 @@ interface IUserRepository {
 
     public function verifyPassword(Array $userLogin);
 
-    public function checkType(int $id);
+    public function getType(int $id);
 
     public function getBalance(int $id);
 }
