@@ -349,3 +349,9 @@ Para executar os testes unitarios, utilize o seguinte comando na pasta raiz do p
 ```
 ./vendor/bin/phpunit --testsuite unit_testing   
 ```
+
+Para executar os testes de integracao, utilize o seguinte comando na pasta raiz do projeto:
+
+```
+./vendor/bin/phpunit --testsuite unit_integration   
+```
