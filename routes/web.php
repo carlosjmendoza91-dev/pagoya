@@ -13,6 +13,18 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->group(['prefix' => 'api'], function ($router)
+{
+    $router->post('user/signup', 'AuthController@signup');
+    $router->post('user/login', 'AuthController@login');
+
+    $router->group(['middleware' => 'auth'], function ($router)
+    {
+        $router->post('transaction', 'TransactionController@store');
+        $router->post('user/logout', 'AuthController@logout');
+    });
+
 });
+
+
+
