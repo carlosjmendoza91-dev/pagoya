@@ -68,6 +68,13 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
+Tambem e importante adicionar as URLs dos servicos externos no arquivo .env
+
+```
+URL_AUTORIZADOR_EXTERNO=https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6
+URL_NOTIFICADOR=http://o4d9z.mocklab.io/notify
+```
+
 Apos configurar as credenciais do banco de dados, execute o seguinte comando para criar automaticamente as tabelas que a plataforma precisa
 
 ```
