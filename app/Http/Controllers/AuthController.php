@@ -21,7 +21,7 @@ class AuthController extends Controller
     public function signup(SignUpRequest $signUpRequest)
     {
         $newUser = $this->user->create($signUpRequest->getParams());
-        return $this->returnResponse([], 200, config('authMessages.signup_success'));
+        return $this->returnResponse([], 201, config('authMessages.signup_success'));
     }
 
     public function login(LoginRequest $loginRequest)

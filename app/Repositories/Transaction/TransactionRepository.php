@@ -6,6 +6,7 @@ namespace App\Repositories\Transaction;
 use App\Models\Transaction;
 use App\Repositories\User\IUserRepository;
 use App\Http\Helpers\DocumentTypeChecker;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class TransactionRepository implements ITransactionRepository
 {
@@ -37,14 +38,14 @@ class TransactionRepository implements ITransactionRepository
     {
         $user = $this->user->getType($id);
         if($user === DocumentTypeChecker::PJ_DOCUMENT_TYPE)
-            throw new \Exception(config('transactionMessages.user_type_not_allowed'));
+            throw new AuthorizationException(config('transactionMessages.user_type_not_allowed'));
     }
 
     private function checkUserBalance(int $id, float $amount)
     {
         $balance = $this->user->getBalance($id);
         if(round($balance, 2) < round($amount, 2))
-            throw new \Exception(config('transactionMessages.user_no_funds_available'));
+            throw new AuthorizationException(config('transactionMessages.user_no_funds_available'));
     }
 
 }

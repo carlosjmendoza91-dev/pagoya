@@ -28,6 +28,18 @@ class ExternalServiceResponse
         return $this->errors;
     }
 
+    public function setStatus($status){
+        $this->status = $status;
+    }
+
+    public function setMessage($message){
+        $this->message = $message;
+    }
+
+    public function setErrors($errors){
+        $this->errors = $errors;
+    }
+
     public function toArray() {
         return get_object_vars($this);
     }

@@ -28,19 +28,6 @@ class UserRepository implements IUserRepository
         return $newUser->toArray();
     }
 
-    public function verifyPassword(Array $userLogin)
-    {
-        $currentUser = $this->getUserByEmail($userLogin['email']);
-        if(Hash::check($userLogin['password'], $currentUser->password))
-            return $currentUser;
-        return null;
-    }
-
-    private function getUserByEmail(string $email){
-        return User::where('email', $email)->first();
-    }
-
-
     public function getType(int $id)
     {
         $user = User::where('id', $id)->first();
@@ -70,6 +57,9 @@ class UserRepository implements IUserRepository
             $this->autorizingService->getAuthorization();
             DB::commit();
         });
-        return $this->notifierService->sendNotification();
+
+        $externalServiceResponse = $this->notifierService->sendNotification();
+        $externalServiceResponse->setMessage(config('authorizingServiceMessages.transaction_completed'));
+        return $externalServiceResponse;
     }
 }

@@ -16,7 +16,12 @@ class SignUpRequest extends Controller
         $this->validate(
             $request, [
                 'full_name' => 'required|string',
-                'document' => 'required|string|unique:users',
+                'document' => array(
+                    'required',
+                    'string',
+                    'unique:users',
+                    'regex:/(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)|(^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$)/'
+                ),
                 'email' => 'required|email|unique:users',
                 'password' => 'required|min:5',
                 'phone' => 'string',

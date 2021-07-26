@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Requests\Transaction\TransactionRequest;
 use App\Repositories\Transaction\ITransactionRepository;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class TransactionController extends Controller
 {
@@ -27,7 +28,7 @@ class TransactionController extends Controller
 
     private function checkLoggedInUser(int $idPayer){
         if(auth()->user()->getAuthIdentifier() !== $idPayer)
-            throw new \Exception(config('authMessages.user_no_priviledges'));
+            throw new AuthorizationException(config('authMessages.user_no_match'));
         return true;
     }
 
