@@ -9,7 +9,7 @@
         "chuckrincon/lumen-config-discover": "^1.0",
         "guzzlehttp/guzzle": "^7.3",
         "laravel/lumen-framework": "^8.0",
-        "tymon/jwt-auth": "dev-develop"
+        "tymon/jwt-auth": "^1.0.0-rc.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
