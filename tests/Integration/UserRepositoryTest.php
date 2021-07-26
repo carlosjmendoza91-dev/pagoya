@@ -3,22 +3,15 @@
 namespace AppTests\Integration;
 
 
-use App\Models\User;
 use App\Repositories\User\UserRepository;
 use App\Services\AuthorizingService;
 use App\Services\NotifierService;
-use Illuminate\Database\QueryException;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 use TestCase;
 
 class UserRepositoryTest extends TestCase
 {
     use DatabaseTransactions;
-
-    public function __construct(?string $name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-    }
 
     /**
      * Teste para criar um novo usuario PF.
@@ -99,8 +92,8 @@ class UserRepositoryTest extends TestCase
 
         $userData = [
             "full_name" => "Carlos Mendoza",
-            "document" => "063.913.247-28",
-            "email" => "carlosjmendoza2@gmail.com",
+            "document" => "063.913.247-11",
+            "email" => "carlosjmendoza796454@gmail.com",
             "password" => "12345",
             "phone" => "27999449153",
             "balance" => 150.75
@@ -127,8 +120,8 @@ class UserRepositoryTest extends TestCase
 
         $userData = [
             "full_name" => "Carlos Mendoza Empresa",
-            "document" => "99.962.217/0001-41",
-            "email" => "carlosjmendozairidescent3@gmail.com",
+            "document" => "99.962.217/0001-55",
+            "email" => "carlosjmendozairidescent39657@gmail.com",
             "password" => "67890",
             "phone" => "27999449153",
             "balance" => 200
@@ -155,8 +148,8 @@ class UserRepositoryTest extends TestCase
 
         $userData = [
             "full_name" => "Carlos Mendoza",
-            "document" => "063.913.247-28",
-            "email" => "carlosjmendoza2@gmail.com",
+            "document" => "063.913.247-29",
+            "email" => "carlosjmendoza1144@gmail.com",
             "password" => "12345",
             "phone" => "27999449153",
             "balance" => 20
@@ -183,8 +176,8 @@ class UserRepositoryTest extends TestCase
 
         $userDataPF = [
             "full_name" => "Carlos Mendoza",
-            "document" => "063.913.247-28",
-            "email" => "carlosjmendoza2@gmail.com",
+            "document" => "874.953.111-30",
+            "email" => "carlosjmendoza9854214@gmail.com",
             "password" => "12345",
             "phone" => "27999449153",
             "balance" => 100
@@ -194,8 +187,8 @@ class UserRepositoryTest extends TestCase
 
         $userDataPJ = [
             "full_name" => "Carlos Mendoza Empresa",
-            "document" => "99.962.217/0001-41",
-            "email" => "carlosjmendozairidescent3@gmail.com",
+            "document" => "99.296.217/0001-42",
+            "email" => "carlosjmendozairidescent741258@gmail.com",
             "password" => "67890",
             "phone" => "27999449153",
             "balance" => 200
